@@ -5,22 +5,11 @@ import Link from "next/link";
 import Map, { Marker } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { Search, Bell, List, Utensils, Clock, MapPin } from "lucide-react";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { supabase } from "@/lib/supabaseClient";
 import { ListingCard } from "@/components/listing-card";
 import { DetailView } from "@/components/detail-view";
-import { supabase } from "@/lib/supabaseClient";
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
-
-type Payload = {
-  new: Record<string, any>;
-  old: Record<string, any>;
-};
 
 type Listing = {
   id: number;
@@ -33,28 +22,10 @@ type Listing = {
   is_cleared: boolean;
   image_description: string;
   is_sent_from_telegram: boolean;
-  clear_by: string;
+  clear_by: string | null;
 };
 
-
-
-
-type Location = {
-  id: string;
-  name: string;
-  location: string;
-  tags: string[];
-  description: string;
-  timeLeft: string;
-  distance: string;
-  lat: number;
-  lng: number;
-  image: string;
-  images: string[];
-  availableUntil: string;
-};
-
-const CustomMarker: React.FC<{ location: Location; onClick: () => void }> = ({
+const CustomMarker: React.FC<{ location: Listing; onClick: () => void }> = ({
   location,
   onClick,
 }) => (
@@ -63,15 +34,23 @@ const CustomMarker: React.FC<{ location: Location; onClick: () => void }> = ({
       <Utensils className="text-[#ffffff] w-5 h-5" />
     </div>
     <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-48 bg-white p-2 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-      <h4 className="font-semibold text-sm mb-1">{location.name}</h4>
+      <h4 className="font-semibold text-sm mb-1">{location.raw_message}</h4>
       <div className="flex items-center text-xs text-gray-600 mb-1">
         <MapPin className="w-3 h-3 mr-1" />
-        <span>{location.location}</span>
+        <span>{location.roomCode}</span>
       </div>
-      <div className="flex items-center text-xs text-gray-600">
-        <Clock className="w-3 h-3 mr-1" />
-        <span>{location.timeLeft} left</span>
-      </div>
+      {location.clear_by && (
+        <div className="flex items-center text-xs text-gray-600">
+          <Clock className="w-3 h-3 mr-1" />
+          <span>
+            {Math.round(
+              (new Date(location.clear_by).getTime() - new Date().getTime()) /
+                (1000 * 60)
+            )}{" "}
+            mins left
+          </span>
+        </div>
+      )}
     </div>
   </div>
 );
@@ -79,19 +58,18 @@ const CustomMarker: React.FC<{ location: Location; onClick: () => void }> = ({
 export default function MapPage() {
   const [listings, setListings] = useState<Listing[]>([]);
   const [showListView, setShowListView] = useState(false);
-  const [selectedListing, setSelectedListing] = useState<Location | null>(null);
+  const [selectedListing, setSelectedListing] = useState<Listing | null>(null);
 
   useEffect(() => {
     const fetchMessages = async () => {
       const { data, error } = await supabase
         .from("messages")
         .select("*")
-        .order("created_at", { ascending: true }); // Fetch messages in chronological order
+        .order("created_at", { ascending: true });
 
       if (error) {
         console.error("Error fetching messages:", error);
       } else {
-        console.log("Data", data)
         setListings(data as Listing[]);
       }
     };
@@ -99,37 +77,32 @@ export default function MapPage() {
     fetchMessages();
   }, []);
 
-    // Listen for new messages
-    useEffect(() => {
-      const handleInserts = (payload: { new: Listing }) => {
-        console.log("New listing received:", payload.new);
-        setListings((prevListings) => [...prevListings, payload.new]);
-      };
-  
-      const channel = supabase
-        .channel("messages")
-        .on(
-          "postgres_changes",
-          { event: "INSERT", schema: "public", table: "messages" },
-          handleInserts
-        )
-        .subscribe();
-  
-      return () => {
-        channel.unsubscribe();
-      };
-    }, []);
+  // Listen for new messages
+  useEffect(() => {
+    const handleInserts = (payload: { new: Listing }) => {
+      console.log("New listing received:", payload.new);
+      setListings((prevListings) => [...prevListings, payload.new]);
+    };
 
-  const sortedlistings = useMemo(() => {
-    return [...listings].sort((a, b) => {
-      const distanceA = parseInt(a.distance);
-      const distanceB = parseInt(b.distance);
-      if (distanceA !== distanceB) return distanceA - distanceB;
+    const channel = supabase
+      .channel("messages")
+      .on(
+        "postgres_changes",
+        { event: "INSERT", schema: "public", table: "messages" },
+        handleInserts
+      )
+      .subscribe();
 
-      const timeLeftA = parseInt(a.timeLeft);
-      const timeLeftB = parseInt(b.timeLeft);
-      return timeLeftA - timeLeftB;
-    });
+    return () => {
+      channel.unsubscribe();
+    };
+  }, []);
+
+  const sortedListings = useMemo(() => {
+    return listings.sort(
+      (a, b) =>
+        new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+    );
   }, [listings]);
 
   return (
@@ -142,45 +115,20 @@ export default function MapPage() {
           >
             ResQ+
           </Link>
-          <div className="flex items-center gap-8">
-            <nav className="flex items-center gap-8">
-              <Link
-                href="/"
-                className="text-gray-600 hover:text-[#1D4ED8] transition-colors"
-              >
-                Home
-              </Link>
-              <Link
-                href="/map"
-                className="text-[#1D4ED8] hover:opacity-80 transition-opacity"
-              >
-                Map
-              </Link>
-            </nav>
-            <div className="flex items-center gap-4">
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <button className="text-gray-600 hover:text-[#1D4ED8] transition-colors p-2 rounded-full hover:bg-blue-50">
-                      <Search className="w-5 h-5" />
-                    </button>
-                  </TooltipTrigger>
-                  <TooltipContent>Search rescues</TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <button className="text-gray-600 hover:text-[#1D4ED8] transition-colors p-2 rounded-full hover:bg-blue-50">
-                      <Bell className="w-5 h-5" />
-                    </button>
-                  </TooltipTrigger>
-                  <TooltipContent>Notifications</TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-            </div>
-          </div>
+          <nav className="flex items-center gap-8">
+            <Link
+              href="/"
+              className="text-gray-600 hover:text-[#1D4ED8] transition-colors"
+            >
+              Home
+            </Link>
+            <Link
+              href="/map"
+              className="text-[#1D4ED8] hover:opacity-80 transition-opacity"
+            >
+              Map
+            </Link>
+          </nav>
         </div>
       </header>
 
@@ -198,15 +146,15 @@ export default function MapPage() {
                 mapStyle="mapbox://styles/mapbox/streets-v11"
                 mapboxAccessToken={MAPBOX_TOKEN}
               >
-                {sortedlistings.map((location) => (
+                {sortedListings.map((listing) => (
                   <Marker
-                    key={location.id}
-                    longitude={location.lng}
-                    latitude={location.lat}
+                    key={listing.id}
+                    longitude={listing.longitude}
+                    latitude={listing.latitude}
                   >
                     <CustomMarker
-                      location={location}
-                      onClick={() => setSelectedListing(location)}
+                      location={listing}
+                      onClick={() => setSelectedListing(listing)}
                     />
                   </Marker>
                 ))}
@@ -225,7 +173,7 @@ export default function MapPage() {
           ) : (
             <div className="max-w-[1200px] mx-auto px-6 py-8">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl text-[#1751d6 font-bold">
+                <h2 className="text-2xl font-bold text-[#1751d6]">
                   Available Rescues
                 </h2>
                 <button
@@ -237,13 +185,31 @@ export default function MapPage() {
                 </button>
               </div>
               <div className="grid gap-4">
-                {sortedlistings.map((rescue) => (
-                  <ListingCard
-                    key={rescue.id}
-                    listing={rescue}
-                    onClick={() => setSelectedListing(rescue)}
-                  />
-                ))}
+              {sortedListings.map((listing) => {
+  // Calculate time left
+  const timeLeft =
+    listing.clear_by && new Date(listing.clear_by).getTime() > Date.now()
+      ? `${Math.round(
+          (new Date(listing.clear_by).getTime() - Date.now()) / (1000 * 60)
+        )} mins`
+      : "Expired";
+
+  return (
+    <ListingCard
+      key={listing.id}
+      listing={{
+        id: listing.id.toString(),
+        name: listing.image_description,
+        description: listing.raw_message,
+        location: listing.roomCode,
+        timeLeft, // Use calculated time left
+        image: listing.image_url,
+      }}
+      onClick={() => setSelectedListing(listing)}
+    />
+  );
+})}
+
               </div>
             </div>
           )}
@@ -254,7 +220,15 @@ export default function MapPage() {
         <DetailView
           isOpen={!!selectedListing}
           onClose={() => setSelectedListing(null)}
-          listing={selectedListing}
+          listing={{
+            id: selectedListing?.id.toString() || "",
+            name: selectedListing?.raw_message || "Unnamed Listing",
+            description: selectedListing?.image_description || "",
+            location: selectedListing?.roomCode || "Unknown Location",
+            clear_by: selectedListing?.clear_by,
+            image_url: selectedListing?.image_url,
+            tags: selectedListing?.is_cleared ? ["Cleared"] : ["Active"],
+          }}
         />
       )}
     </div>

@@ -30,7 +30,7 @@ type Venue = {
   aliases?: string[];
 };
 
-interface Message {
+type Listing = {
   id: number;
   raw_message: string;
   roomCode: string;
@@ -42,12 +42,12 @@ interface Message {
   image_description: string;
   is_sent_from_telegram: boolean;
   clear_by: string | null;
-}
+};
 
 export default function FavoriteLocationsPage() {
   const [favoriteLocations, setFavoriteLocations] = useState<string[]>([]);
-  const [nearbyMessages, setNearbyMessages] = useState<Message[]>([]);
-  const [allMessages, setAllMessages] = useState<Message[]>([]);
+  const [nearbyListings, setNearbyListings] = useState<Listing[]>([]);
+  const [allListings, setAllListings] = useState<Listing[]>([]);
   const isFirstRun = useRef(true);
 
   const venuesData: Venue[] = venues.map((venue, index) => ({
@@ -59,17 +59,17 @@ export default function FavoriteLocationsPage() {
   }));
 
   // Fetch messages from Supabase
-  const fetchMessages = async () => {
+  const fetchListings = async () => {
     const { data, error } = await supabase.from('messages').select('*');
     if (error) {
-      console.error('Error fetching messages:', error);
+      console.error('Error fetching Listings:', error);
       return;
     }
-    setAllMessages(data as Message[]);
+    setAllListings(data as Listing[]);
   };
 
   useEffect(() => {
-    fetchMessages(); // Fetch messages on component mount
+    fetchListings(); // Fetch messages on component mount
 
     if (isFirstRun.current) {
       isFirstRun.current = false;
@@ -85,13 +85,13 @@ export default function FavoriteLocationsPage() {
   }, []);
 
   useEffect(() => {
-    const nearby = allMessages.filter((message) =>
-      favoriteLocations.includes(message.roomCode)
+    const nearby = allListings.filter((listing) =>
+      favoriteLocations.includes(listing.roomCode)
     );
-    setNearbyMessages(nearby);
+    setNearbyListings(nearby);
 
     Cookies.set('favoriteLocations', JSON.stringify(favoriteLocations), { expires: 7 });
-  }, [favoriteLocations, allMessages]);
+  }, [favoriteLocations, allListings]);
 
   const toggleLocation = (location: string) => {
     setFavoriteLocations((prev) =>
@@ -139,27 +139,27 @@ export default function FavoriteLocationsPage() {
             </CardContent>
           </Card>
           <div>
-            <h2 className="text-xl font-semibold text-[#1751d6] mb-4">Nearby Messages</h2>
-            {nearbyMessages.length > 0 ? (
+            <h2 className="text-xl font-semibold text-[#1751d6] mb-4">Nearby Listings</h2>
+            {nearbyListings.length > 0 ? (
               <ScrollArea className="h-[500px] pr-4">
                 <div className="space-y-4">
-                  {nearbyMessages.map((message) => (
+                  {nearbyListings.map((listing) => (
                     <ListingCard
-                      key={message.id}
+                      key={listing.id}
                       listing={{
-                        id: message.id.toString(),
-                        name: message.raw_message,
-                        description: message.image_description,
-                        location: message.roomCode,
-                        distance: `${message.longitude}, ${message.latitude}`,
-                        timeLeft: message.clear_by
+                        id: listing.id.toString(),
+                        name: listing.raw_message,
+                        description: listing.image_description,
+                        location: listing.roomCode,
+                        distance: `${listing.longitude}, ${listing.latitude}`,
+                        timeLeft: listing.clear_by
                           ? `${Math.round(
-                              (new Date(message.clear_by).getTime() - new Date().getTime()) /
+                              (new Date(listing.clear_by).getTime() - new Date().getTime()) /
                                 (1000 * 60)
                             )} mins`
                           : 'Unknown',
-                        tags: message.is_cleared ? ['Cleared'] : ['Active'],
-                        image: message.image_url,
+                        tags: listing.is_cleared ? ['Cleared'] : ['Active'],
+                        image: listing.image_url,
                       }}
                       onClick={() => {}}
                     />
@@ -170,8 +170,8 @@ export default function FavoriteLocationsPage() {
               <Card className="bg-white shadow-lg border-0">
                 <CardContent className="p-6 text-center">
                   <p className="text-black mb-4">
-                    No nearby messages found. Select your favorite locations to see
-                    available messages.
+                    No nearby listings found. Select your favorite locations to see
+                    available listings.
                   </p>
                   <Star className="w-12 h-12 text-[#1751d6] opacity-60 mx-auto" />
                 </CardContent>
