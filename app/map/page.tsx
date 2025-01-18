@@ -1,91 +1,34 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import Link from 'next/link'
 import Map, { Marker } from 'react-map-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
+import { supabase } from '@/lib/supabase' // Ensure you have a central supabase client configuration
 import { Search, Bell, List, Utensils, Clock, MapPin } from 'lucide-react'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { ListingCard } from '@/components/listing-card'
 import { DetailView } from '@/components/detail-view'
-import { Badge } from "@/components/ui/badge"
 
 const MAPBOX_TOKEN = 'pk.eyJ1Ijoic3VkZGVybnB5IiwiYSI6ImNtNjF1cXRyZjBucWMycHB5MXQ3cGl6MHcifQ.7A1XDPcsmGeE981d2m7LTg'
 
-const rescueLocations: Location[] = [
-    { 
-    id: '1', 
-    name: 'Beehoon', 
-    location: 'S16',
-    tags: ['Veg', 'Halal'],
-    description: 'Fresh vegetarian beehoon with various sides',
-    timeLeft: '45 mins',
-    distance: '250m',
-    lat: 1.2978,
-    lng: 103.7807,
-    image: '/images/beehoon.jpg',
-    images: ['/images/beehoon.jpg', '/images/beehoon-2.jpg'],
-    availableUntil: '5:00 PM'
-  },
-  { 
-    id: '2', 
-    name: 'Noodles', 
-    location: 'Utown',
-    tags: ['Beef'],
-    description: '',
-    timeLeft: '30 mins',
-    distance: '1.2km',
-    lat: 1.3039,
-    lng: 103.7739,
-    image: '/images/noodles.jpg',
-    images: ['/images/noodles.jpg'],
-    availableUntil: '4:45 PM'
-  },
-  { 
-    id: '3', 
-    name: 'Rice and Veggie', 
-    location: 'Com1',
-    tags: ['Veg'],
-    description: 'Mixed vegetables with rice',
-    timeLeft: '15 mins',
-    distance: '800m',
-    lat: 1.2958,
-    lng: 103.7735,
-    image: '/images/rice-veggie.jpg',
-    images: ['/images/rice-veggie.jpg', '/images/rice-veggie-2.jpg', '/images/rice-veggie-3.jpg'],
-    availableUntil: '4:30 PM'
-  },
-]
-
 type Location = {
-    id: string;
-    name: string;
-    location: string;
-    tags: string[];
-    description: string;
-    timeLeft: string;
-    distance: string;
-    lat: number;
-    lng: number;
-    image: string;
-    images: string[];
-    availableUntil: string;
-  };
-
-  interface Rescue {
-    id: string
-    name: string
-    description: string
-    location: string
-    distance: string
-    timeLeft: string
-    tags: string[]
-    image: string
-  }
-  
+  id: string;
+  name: string;
+  location: string;
+  tags: string[];
+  description: string;
+  timeLeft: string;
+  distance: string;
+  lat: number;
+  lng: number;
+  image: string;
+  images: string[];
+  availableUntil: string;
+}
 
 const CustomMarker: React.FC<{ location: Location; onClick: () => void }> = ({ location, onClick }) => (
-    <div onClick={onClick} className="group relative cursor-pointer">
+  <div onClick={onClick} className="group relative cursor-pointer">
     <div className="bg-[#1751d6] rounded-full p-3 shadow-md hover:shadow-lg transition-shadow duration-300">
       <Utensils className="text-[#ffffff] w-5 h-5" />
     </div>
@@ -104,23 +47,51 @@ const CustomMarker: React.FC<{ location: Location; onClick: () => void }> = ({ l
 )
 
 export default function MapPage() {
+  const [rescueLocations, setRescueLocations] = useState<Location[]>([])
   const [showListView, setShowListView] = useState(false)
-  const [selectedListing, setSelectedListing] = useState<Location | null>(null);
+  const [selectedListing, setSelectedListing] = useState<Location | null>(null)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase.from('rescue_locations').select('*')
+      if (error) {
+        console.error('Error fetching data:', error)
+      } else {
+        setRescueLocations(data as Location[])
+      }
+    }
+    fetchData()
+  }, [])
+
+  useEffect(() => {
+    const channel = supabase
+      .channel('rescue-locations')
+      .on(
+        'postgres_changes',
+        { event: 'INSERT', schema: 'public', table: 'rescue_locations' },
+        (payload: { new: Location }) => {
+          console.log('New location added:', payload.new)
+          setRescueLocations((prev) => [...prev, payload.new as Location])
+        }
+      )
+      .subscribe()
+
+    return () => {
+      supabase.removeChannel(channel)
+    }
+  }, [])
 
   const sortedRescueLocations = useMemo(() => {
     return [...rescueLocations].sort((a, b) => {
-      // Sort by distance first
-      const distanceA = parseInt(a.distance);
-      const distanceB = parseInt(b.distance);
-      if (distanceA !== distanceB) {
-        return distanceA - distanceB;
-      }
-      // If distances are equal, sort by time left
-      const timeLeftA = parseInt(a.timeLeft);
-      const timeLeftB = parseInt(b.timeLeft);
-      return timeLeftA - timeLeftB;
-    });
-  }, []);
+      const distanceA = parseInt(a.distance)
+      const distanceB = parseInt(b.distance)
+      if (distanceA !== distanceB) return distanceA - distanceB
+
+      const timeLeftA = parseInt(a.timeLeft)
+      const timeLeftB = parseInt(b.timeLeft)
+      return timeLeftA - timeLeftB
+    })
+  }, [rescueLocations])
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50">
@@ -189,7 +160,6 @@ export default function MapPage() {
                 ))}
               </Map>
 
-              {/* Overlayed List View Button */}
               <div className="absolute top-4 left-4 z-10 flex items-center">
                 <button
                   onClick={() => setShowListView(true)}
@@ -236,4 +206,3 @@ export default function MapPage() {
     </div>
   )
 }
-
