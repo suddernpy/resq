@@ -1,0 +1,957 @@
+[
+    {
+        "roomCode": "LT17",
+        "coordinate": {
+            "longitude": 103.774011,
+            "latitude": 1.293606
+        }
+    },
+    {
+        "roomCode": "LT16",
+        "coordinate": {
+            "longitude": 103.773864,
+            "latitude": 1.293917
+        }
+    },
+    {
+        "roomCode": "BIZ1",
+        "coordinate": {
+            "longitude": 103.77405,
+            "latitude": 1.292415
+        }
+    },
+    {
+        "roomCode": "LT10",
+        "coordinate": {
+            "longitude": 103.772059,
+            "latitude": 1.294916
+        }
+    },
+    {
+        "roomCode": "AS7",
+        "coordinate": {
+            "longitude": 103.771069,
+            "latitude": 1.294372
+        }
+    },
+    {
+        "roomCode": "AS8",
+        "coordinate": {
+            "longitude": 103.772118,
+            "latitude": 1.296246
+        }
+    },
+    {
+        "roomCode": "S2",
+        "coordinate": {
+            "longitude": 103.778052,
+            "latitude": 1.295498
+        }
+    },
+    {
+        "roomCode": "S1A",
+        "coordinate": {
+            "longitude": 103.778166,
+            "latitude": 1.295921
+        }
+    },
+    {
+        "roomCode": "S16",
+        "coordinate": {
+            "longitude": 103.780613,
+            "latitude": 1.296829
+        }
+    },
+    {
+        "roomCode": "LT3",
+        "coordinate": {
+            "longitude": 103.773401,
+            "latitude": 1.297783
+        }
+    },
+    {
+        "roomCode": "EA",
+        "coordinate": {
+            "longitude": 103.770407,
+            "latitude": 1.300061
+        }
+    },
+    {
+        "roomCode": "LT1",
+        "coordinate": {
+            "longitude": 103.771293,
+            "latitude": 1.299513
+        }
+    },
+    {
+        "roomCode": "LT5",
+        "coordinate": {
+            "longitude": 103.771351,
+            "latitude": 1.298305
+        }
+    },
+    {
+        "roomCode": "E1",
+        "coordinate": {
+            "longitude": 103.771229,
+            "latitude": 1.298478
+        }
+    },
+    {
+        "roomCode": "E4A",
+        "coordinate": {
+            "longitude": 103.772623,
+            "latitude": 1.298618
+        }
+    },
+    {
+        "roomCode": "E3",
+        "coordinate": {
+            "longitude": 103.771591,
+            "latitude": 1.299525
+        }
+    },
+    {
+        "roomCode": "LT4",
+        "coordinate": {
+            "longitude": 103.773518,
+            "latitude": 1.297478
+        }
+    },
+    {
+        "roomCode": "COM1",
+        "coordinate": {
+            "longitude": 103.773649,
+            "latitude": 1.295399
+        }
+    },
+    {
+        "roomCode": "i3",
+        "coordinate": {
+            "longitude": 103.775568,
+            "latitude": 1.292453,
+            "z": 10
+        }
+    },
+    {
+        "roomCode": "LT7",
+        "coordinate": {
+            "longitude": 103.771084,
+            "latitude": 1.300082
+        }
+    },
+    {
+        "roomCode": "E4",
+        "coordinate": {
+            "longitude": 103.771701,
+            "latitude": 1.298852
+        }
+    },
+    {
+        "roomCode": "LT2",
+        "coordinate": {
+            "longitude": 103.771405,
+            "latitude": 1.299312
+        }
+    },
+    {
+        "roomCode": "LT6",
+        "coordinate": {
+            "longitude": 103.771963,
+            "latitude": 1.298759
+        }
+    },
+    {
+        "roomCode": "E2",
+        "coordinate": {
+            "longitude": 103.771241,
+            "latitude": 1.299118
+        }
+    },
+    {
+        "roomCode": "AS3",
+        "coordinate": {
+            "longitude": 103.771438,
+            "latitude": 1.294756
+        }
+    },
+    {
+        "roomCode": "AS5",
+        "coordinate": {
+            "longitude": 103.771837,
+            "latitude": 1.294211
+        }
+    },
+    {
+        "roomCode": "AS1",
+        "coordinate": {
+            "longitude": 103.772425,
+            "latitude": 1.295546
+        }
+    },
+    {
+        "roomCode": "AS4",
+        "coordinate": {
+            "longitude": 103.77198,
+            "latitude": 1.294628
+        }
+    },
+    {
+        "roomCode": "AS2",
+        "coordinate": {
+            "longitude": 103.771526,
+            "latitude": 1.295196
+        }
+    },
+    {
+        "roomCode": "LT28",
+        "coordinate": {
+            "longitude": 103.78115,
+            "latitude": 1.2972
+        }
+    },
+    {
+        "roomCode": "S5",
+        "coordinate": {
+            "longitude": 103.779637,
+            "latitude": 1.29563
+        }
+    },
+    {
+        "roomCode": "LT32",
+        "coordinate": {
+            "longitude": 103.778302,
+            "latitude": 1.29614
+        }
+    },
+    {
+        "roomCode": "LT27",
+        "coordinate": {
+            "longitude": 103.780901,
+            "latitude": 1.296993
+        }
+    },
+    {
+        "roomCode": "LT31",
+        "coordinate": {
+            "longitude": 103.780394,
+            "latitude": 1.296863
+        }
+    },
+    {
+        "roomCode": "E5",
+        "coordinate": {
+            "longitude": 103.772033,
+            "latitude": 1.298178
+        }
+    },
+    {
+        "roomCode": "LT34",
+        "coordinate": {
+            "longitude": 103.780839,
+            "latitude": 1.29773
+        }
+    },
+    {
+        "roomCode": "LT26",
+        "coordinate": {
+            "longitude": 103.781104,
+            "latitude": 1.296444
+        }
+    },
+    {
+        "roomCode": "LT21",
+        "coordinate": {
+            "longitude": 103.779467,
+            "latitude": 1.295357
+        }
+    },
+    {
+        "roomCode": "LT33",
+        "coordinate": {
+            "longitude": 103.780909,
+            "latitude": 1.297744
+        }
+    },
+    {
+        "roomCode": "S14",
+        "coordinate": {
+            "longitude": 103.779592,
+            "latitude": 1.296735
+        }
+    },
+    {
+        "roomCode": "LT20",
+        "coordinate": {
+            "longitude": 103.77882,
+            "latitude": 1.295844
+        }
+    },
+    {
+        "roomCode": "LT29",
+        "coordinate": {
+            "longitude": 103.781219,
+            "latitude": 1.297031
+        }
+    },
+    {
+        "roomCode": "S8",
+        "coordinate": {
+            "longitude": 103.779246,
+            "latitude": 1.296107
+        }
+    },
+    {
+        "roomCode": "S13",
+        "coordinate": {
+            "longitude": 103.779088,
+            "latitude": 1.296773
+        }
+    },
+    {
+        "roomCode": "EW2",
+        "coordinate": {
+            "longitude": 103.772601,
+            "latitude": 1.299099,
+            "z": 20
+        }
+    },
+    {
+        "roomCode": "LT7A",
+        "coordinate": {
+            "longitude": 103.770948,
+            "latitude": 1.300481
+        }
+    },
+    {
+        "roomCode": "MD1",
+        "coordinate": {
+            "longitude": 103.780718,
+            "latitude": 1.29542
+        }
+    },
+    {
+        "roomCode": "AS6",
+        "coordinate": {
+            "longitude": 103.773311,
+            "latitude": 1.295353
+        }
+    },
+    {
+        "roomCode": "COM2",
+        "coordinate": {
+            "longitude": 103.774159,
+            "latitude": 1.293577
+        }
+    },
+    {
+        "roomCode": "LT15",
+        "coordinate": {
+            "longitude": 103.773409,
+            "latitude": 1.295522
+        }
+    },
+    {
+        "roomCode": "LT18",
+        "coordinate": {
+            "longitude": 103.774605,
+            "latitude": 1.293305
+        }
+    },
+    {
+        "roomCode": "S17",
+        "coordinate": {
+            "longitude": 103.780696,
+            "latitude": 1.297722
+        }
+    },
+    {
+        "roomCode": "LT9",
+        "coordinate": {
+            "longitude": 103.772251,
+            "latitude": 1.294969
+        }
+    },
+    {
+        "roomCode": "LT11",
+        "coordinate": {
+            "longitude": 103.771399,
+            "latitude": 1.295457
+        }
+    },
+    {
+        "roomCode": "LT8",
+        "coordinate": {
+            "longitude": 103.771991,
+            "latitude": 1.294129
+        }
+    },
+    {
+        "roomCode": "LT12",
+        "coordinate": {
+            "longitude": 103.771148,
+            "latitude": 1.29498
+        }
+    },
+    {
+        "roomCode": "LT14",
+        "coordinate": {
+            "longitude": 103.773358,
+            "latitude": 1.295711
+        }
+    },
+    {
+        "roomCode": "E2A",
+        "coordinate": {
+            "longitude": 103.771448,
+            "latitude": 1.298713
+        }
+    },
+    {
+        "roomCode": "WS2",
+        "coordinate": {
+            "longitude": 103.772532,
+            "latitude": 1.299395,
+            "z": 25
+        }
+    },
+    {
+        "roomCode": "S11",
+        "coordinate": {
+            "longitude": 103.778863,
+            "latitude": 1.296732
+        }
+    },
+    {
+        "roomCode": "S12",
+        "coordinate": {
+            "longitude": 103.778802,
+            "latitude": 1.29688
+        }
+    },
+    {
+        "roomCode": "LT13",
+        "coordinate": {
+            "longitude": 103.770906,
+            "latitude": 1.295069
+        }
+    },
+    {
+        "roomCode": "CELS",
+        "coordinate": {
+            "longitude": 103.780764,
+            "latitude": 1.294411
+        }
+    },
+    {
+        "roomCode": "E1A",
+        "coordinate": {
+            "longitude": 103.771136,
+            "latitude": 1.29886
+        }
+    },
+    {
+        "roomCode": "MD4",
+        "coordinate": {
+            "longitude": 103.780818,
+            "latitude": 1.295626
+        }
+    },
+    {
+        "roomCode": "MD7",
+        "coordinate": {
+            "longitude": 103.781017,
+            "latitude": 1.296155
+        }
+    },
+    {
+        "roomCode": "E3A",
+        "coordinate": {
+            "longitude": 103.771215,
+            "latitude": 1.300436,
+            "z": 0
+        }
+    },
+    {
+        "roomCode": "S4A",
+        "coordinate": {
+            "longitude": 103.779261,
+            "latitude": 1.295772,
+            "z": 10
+        }
+    },
+    {
+        "roomCode": "I3",
+        "coordinate": {
+            "longitude": 103.775308,
+            "latitude": 1.292712
+        }
+    },
+    {
+        "roomCode": "C4",
+        "coordinate": {
+            "longitude": 103.779148,
+            "latitude": 1.295636
+        }
+    },
+    {
+        "roomCode": "MD10",
+        "coordinate": {
+            "longitude": 103.781681,
+            "latitude": 1.296488
+        }
+    },
+    {
+        "roomCode": "MD11",
+        "coordinate": {
+            "longitude": 103.781739,
+            "latitude": 1.296052
+        }
+    },
+    {
+        "roomCode": "RC2",
+        "coordinate": {
+            "longitude": 103.771991,
+            "latitude": 1.306375
+        }
+    },
+    {
+        "roomCode": "UT",
+        "aliases": ["utown"],
+        "coordinate": {
+            "longitude": 103.773047,
+            "latitude": 1.307262
+        }
+    },
+    {
+        "roomCode": "SR_LT19",
+        "coordinate": {
+            "longitude": 103.774329,
+            "latitude": 1.293713
+        }
+    },
+    {
+        "roomCode": "ENG",
+        "coordinate": {
+            "longitude": 103.770582,
+            "latitude": 1.300612
+        }
+    },
+    {
+        "roomCode": "SDE",
+        "coordinate": {
+            "longitude": 103.771075,
+            "latitude": 1.29729
+        }
+    },
+    {
+        "roomCode": "LT19",
+        "coordinate": {
+            "longitude": 103.774303,
+            "latitude": 1.29373
+        }
+    },
+    {
+        "roomCode": "SR3",
+        "coordinate": {
+            "longitude": 103.817133,
+            "latitude": 1.319202
+        }
+    },
+    {
+        "roomCode": "ESR",
+        "coordinate": {
+            "longitude": 103.817032,
+            "latitude": 1.319112
+        }
+    },
+    {
+        "roomCode": "NAK",
+        "coordinate": {
+            "longitude": 103.773108,
+            "latitude": 1.305495
+        }
+    },
+    {
+        "roomCode": "TC",
+        "coordinate": {
+            "longitude": 103.77345,
+            "latitude": 1.305889
+        }
+    },
+    {
+        "roomCode": "TP",
+        "coordinate": {
+            "longitude": 103.773445,
+            "latitude": 1.304006
+        }
+    },
+    {
+        "roomCode": "ERC",
+        "coordinate": {
+            "longitude": 103.772966,
+            "latitude": 1.306227
+        }
+    },
+    {
+        "roomCode": "CELC",
+        "coordinate": {
+            "longitude": 103.771427,
+            "latitude": 1.296975
+        }
+    },
+    {
+        "roomCode": "UTSRC",
+        "coordinate": {
+            "longitude": 103.772982,
+            "latitude": 1.304055
+        }
+    },
+    {
+        "roomCode": "Yale-NUS",
+        "coordinate": {
+            "longitude": 103.772389,
+            "latitude": 1.306997
+        }
+    },
+    {
+        "roomCode": "RMI",
+        "coordinate": {
+            "longitude": 103.775482,
+            "latitude": 1.292613
+        }
+    },
+    {
+        "roomCode": "HSSMLCR",
+        "coordinate": {
+            "longitude": 103.774345,
+            "latitude": 1.293219
+        }
+    },
+    {
+        "roomCode": "UHALL",
+        "aliases": ["university hall", "uni hall"],
+        "coordinate": {
+            "longitude": 103.777736,
+            "latitude": 1.297068
+        }
+    },
+    {
+        "roomCode": "RC4",
+        "coordinate": {
+            "longitude": 103.772897,
+            "latitude": 1.30829
+        }
+    },
+    {
+        "roomCode": "SDE_ER4",
+        "coordinate": {
+            "longitude": 103.770968,
+            "latitude": 1.297112
+        }
+    },
+    {
+        "roomCode": "CAPT",
+        "coordinate": {
+            "longitude": 103.773425,
+            "latitude": 1.308004
+        }
+    },
+    {
+        "roomCode": "RVR_MPR1",
+        "coordinate": {
+            "longitude": 103.776949,
+            "latitude": 1.297287
+        }
+    },
+    {
+        "roomCode": "YSTCM",
+        "coordinate": {
+            "longitude": 103.772139,
+            "latitude": 1.302344
+        }
+    },
+    {
+        "roomCode": "Eusoff Hall",
+        "coordinate": {
+            "longitude": 103.774613,
+            "latitude": 1.291735
+        }
+    },
+    {
+        "roomCode": "CEREBRO",
+        "coordinate": {
+            "longitude": 103.773688,
+            "latitude": 1.295067
+        }
+    },
+    {
+        "roomCode": "YI",
+        "coordinate": {
+            "longitude": 103.774883,
+            "latitude": 1.298544
+        }
+    },
+    {
+        "roomCode": "EW1",
+        "coordinate": {
+            "longitude": 103.7706,
+            "latitude": 1.298827
+        }
+    },
+    {
+        "roomCode": "MD9",
+        "coordinate": {
+            "longitude": 103.781346,
+            "latitude": 1.296696
+        }
+    },
+    {
+        "roomCode": "RVRC",
+        "coordinate": {
+            "longitude": 103.776824,
+            "latitude": 1.297365
+        }
+    },
+    {
+        "roomCode": "MD4_LAB9",
+        "coordinate": {
+            "longitude": 103.780871,
+            "latitude": 1.295745
+        }
+    },
+    {
+        "roomCode": "MD7_LAB8",
+        "coordinate": {
+            "longitude": 103.781174,
+            "latitude": 1.296064
+        }
+    },
+    {
+        "roomCode": "SPSWETLAB",
+        "coordinate": {
+            "longitude": 103.780302,
+            "latitude": 1.296855
+        }
+    },
+    {
+        "roomCode": "TH",
+        "coordinate": {
+            "longitude": 103.771294,
+            "latitude": 1.292717
+        }
+    },
+    {
+        "roomCode": "PGP",
+        "coordinate": {
+            "longitude": 103.780552,
+            "latitude": 1.290896
+        }
+    },
+    {
+        "roomCode": "SDE2",
+        "coordinate": {
+            "longitude": 103.771132,
+            "latitude": 1.297209
+        }
+    },
+    {
+        "roomCode": "WT",
+        "coordinate": {
+            "longitude": 103.771118,
+            "latitude": 1.297212
+        }
+    },
+    {
+        "roomCode": "KEVII",
+        "coordinate": {
+            "longitude": 103.780847,
+            "latitude": 1.292206
+        }
+    },
+    {
+        "roomCode": "Raffles Hall",
+        "aliases": ["raffles"],
+        "coordinate": {
+            "longitude": 103.773918,
+            "latitude": 1.29975
+        }
+    },
+    {
+        "roomCode": "GBT",
+        "coordinate": {
+            "longitude": 103.770545,
+            "latitude": 1.296803
+        }
+    },
+    {
+        "roomCode": "SR4",
+        "coordinate": {
+            "longitude": 103.816662,
+            "latitude": 1.31869
+        }
+    },
+    {
+        "roomCode": "SDE4",
+        "coordinate": {
+            "longitude": 103.770466,
+            "latitude": 1.296882
+        }
+    },
+    {
+        "roomCode": "CR3",
+        "coordinate": {
+            "longitude": 103.817075,
+            "latitude": 1.319114
+        }
+    },
+    {
+        "roomCode": "CR4",
+        "coordinate": {
+            "longitude": 103.816705,
+            "latitude": 1.318769
+        }
+    },
+    {
+        "roomCode": "Sheares Hall",
+        "aliases": ["sheares"],
+        "coordinate": {
+            "longitude": 103.775428,
+            "latitude": 1.291391
+        }
+    },
+    {
+        "roomCode": "S6",
+        "coordinate": {
+            "longitude": 103.780101,
+            "latitude": 1.295167
+        }
+    },
+    {
+        "roomCode": "USP",
+        "coordinate": {
+            "longitude": 103.773148,
+            "latitude": 1.306576
+        }
+    },
+    {
+        "roomCode": "CFG_CARSPA",
+        "coordinate": {
+            "longitude": 103.774763,
+            "latitude": 1.298506
+        }
+    },
+    {
+        "roomCode": "SR5",
+        "coordinate": {
+            "longitude": 103.816578,
+            "latitude": 1.318684
+        }
+    },
+    {
+        "roomCode": "Frontier",
+        "coordinate": {
+            "longitude": 103.78004,
+            "latitude": 1.296365
+        }
+    },
+    {
+        "roomCode": "Town Plaza",
+        "aliases": ["global learning room"],
+        "coordinate": {
+            "longitude": 103.773553,
+            "latitude": 1.303857
+        }
+    },
+    {
+        "roomCode": "CR2",
+        "coordinate": {
+            "longitude": 103.816679,
+            "latitude": 1.318705
+        }
+    },
+    {
+        "roomCode": "UT22",
+        "coordinate": {
+            "longitude": 103.773551,
+            "latitude": 1.303729
+        }
+    },
+    {
+        "roomCode": "CQT/SR0315",
+        "coordinate": {
+            "longitude": 103.780337,
+            "latitude": 1.297146
+        }
+    },
+    {
+        "roomCode": "HSS",
+        "coordinate": {
+            "longitude": 103.774316,
+            "latitude": 1.293284
+        }
+    },
+    {
+        "roomCode": "Interaction",
+        "coordinate": {
+            "longitude": 103.777612,
+            "latitude": 1.291364
+        }
+    },
+    {
+        "roomCode": "SDE1",
+        "coordinate": {
+            "longitude": 103.77064,
+            "latitude": 1.297369
+        }
+    },
+    {
+        "roomCode": "MD3",
+        "coordinate": {
+            "longitude": 103.781166,
+            "latitude": 1.295354
+        }
+    },
+    {
+        "roomCode": "MD6",
+        "coordinate": {
+            "longitude": 103.781819,
+            "latitude": 1.295345
+        }
+    },
+    {
+        "roomCode": "COM3",
+        "coordinate": {
+            "longitude": 103.774311,
+            "latitude": 1.294925
+        }
+    },
+    {
+        "roomCode": "Ambition_II",
+        "coordinate": {
+            "longitude": 103.774409,
+            "latitude": 1.303589
+        }
+    },
+    {
+        "roomCode": "SDE3",
+        "coordinate": {
+            "longitude": 103.772966,
+            "latitude": 1.295954
+        }
+    },
+    {
+        "roomCode": "COM4",
+        "coordinate": {
+            "longitude": 103.775369,
+            "latitude": 1.295111
+        }
+    },
+    {
+        "roomCode": "YSTCM",
+        "coordinate": {
+            "longitude": 103.772923,
+            "latitude": 1.302256
+        }
+    }
+]
