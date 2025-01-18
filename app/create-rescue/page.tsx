@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, ChangeEvent, FormEvent } from 'react'
+import { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { Button } from "@/components/ui/button"
@@ -11,21 +11,34 @@ import { Label } from "@/components/ui/label"
 import { Card, CardContent } from "@/components/ui/card"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { ArrowLeft, Upload, Info } from 'lucide-react'
+import venuesData from '../../venues.json'; // Adjust the relative path based on your file location
+import { supabase } from "@/lib/supabaseClient";
 
-const locations = ['S16', 'Utown', 'Com1', 'Science', 'Engineering', 'Arts']
 const foodRestrictions = ['Halal', 'Beef', 'Vegetarian', 'Pork']
 
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+
 interface FormData {
-  image: string | null
-  name: string
-  description: string
-  location: string
-  availableUntil: string
-  foodRestrictions: string[]
+  image: File | null;
+  name: string;
+  description: string;
+  location: string;
+  availableUntil: string;
+  foodRestrictions: string[];
+}
+
+
+interface Venue {
+  roomCode: string;
+  coordinate: {
+    longitude: number;
+    latitude: number;
+  };
 }
 
 export default function CreateRescuePage() {
   const router = useRouter()
+  const [venues, setVenues] = useState<string[]>([]);
   const [formData, setFormData] = useState<FormData>({
     image: null,
     name: '',
@@ -34,6 +47,12 @@ export default function CreateRescuePage() {
     availableUntil: '',
     foodRestrictions: [],
   })
+
+  useEffect(() => {
+    // Directly use the imported JSON data
+    const roomCodes = venuesData.map((venue: Venue) => venue.roomCode);
+    setVenues(roomCodes);
+  }, []);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -44,22 +63,64 @@ export default function CreateRescuePage() {
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (file) {
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        setFormData((prev) => ({ ...prev, image: reader.result as string }))
-      }
-      reader.readAsDataURL(file)
-    }
-  }
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault()
-    console.log('Form submitted:', formData)
-    router.push('/')
-  }
+  const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setFormData((prev) => ({ ...prev, image: file }));
+    }
+  };
+
+  const uploadImage = async (image: File) => {
+    const fileName = `${Date.now()}_${image.name}`;
+    const { data, error } = await supabase.storage
+      .from('images') // Replace 'images' with your Supabase storage bucket name
+      .upload(fileName, image);
+  
+    if (error) {
+      console.error('Image upload failed:', error);
+      throw error;
+    }
+    return `${supabaseUrl}/storage/v1/object/public/images/${data.path}`;
+  };
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    try {
+      const venue = venuesData.find((v: Venue) => v.roomCode === formData.location);
+      if (!venue) throw new Error('Invalid location selected');
+
+      let imageUrl = '';
+      if (formData.image) {
+        imageUrl = await uploadImage(formData.image);
+      }
+
+      const rawMessage = `${formData.name}: ${formData.description}`;
+      const { data, error } = await supabase.from('messages').insert({
+        raw_message: rawMessage,
+        roomCode: venue.roomCode,
+        longitude: venue.coordinate.longitude,
+        latitude: venue.coordinate.latitude,
+        image_url: imageUrl,
+        created_at: new Date().toISOString(),
+        is_cleared: false,
+        is_sent_from_telegram: false,
+        image_description: 'none',
+        clear_by: null,
+      });
+
+      if (error) {
+        console.error('Error inserting data:', data, error);
+        throw error;
+      }
+
+      console.log('Listing created:', data);
+      router.push('/');
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50">
@@ -139,7 +200,7 @@ export default function CreateRescuePage() {
                         <SelectValue placeholder="Select location" />
                       </SelectTrigger>
                       <SelectContent>
-                        {locations.map((loc) => (
+                        {venues.map((loc) => (
                           <SelectItem key={loc} value={loc}>{loc}</SelectItem>
                         ))}
                       </SelectContent>
