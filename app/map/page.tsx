@@ -23,6 +23,7 @@ type Listing = {
   image_description: string;
   is_sent_from_telegram: boolean;
   clear_by: string | null;
+  dietary_restrictions: string;
 };
 
 const CustomMarker: React.FC<{ location: Listing; onClick: () => void }> = ({
@@ -199,11 +200,14 @@ export default function MapPage() {
       key={listing.id}
       listing={{
         id: listing.id.toString(),
-        name: listing.image_description,
-        description: listing.raw_message,
+        name: listing.raw_message,
+        description: listing.image_description,
         location: listing.roomCode,
         timeLeft, // Use calculated time left
         image: listing.image_url,
+        tags: listing.dietary_restrictions
+          ? listing.dietary_restrictions.split(",").map(tag => tag.trim())
+          : [],
       }}
       onClick={() => setSelectedListing(listing)}
     />
@@ -227,7 +231,9 @@ export default function MapPage() {
             location: selectedListing?.roomCode || "Unknown Location",
             clear_by: selectedListing?.clear_by,
             image_url: selectedListing?.image_url,
-            tags: selectedListing?.is_cleared ? ["Cleared"] : ["Active"],
+            tags: selectedListing.dietary_restrictions
+        ? selectedListing.dietary_restrictions.split(",").map(tag => tag.trim())
+        : [],
           }}
         />
       )}

@@ -42,6 +42,7 @@ type Listing = {
   image_description: string;
   is_sent_from_telegram: boolean;
   clear_by: string | null;
+  dietary_restrictions: string[];
 };
 
 export default function FavoriteLocationsPage() {
@@ -158,7 +159,7 @@ export default function FavoriteLocationsPage() {
                                 (1000 * 60)
                             )} mins`
                           : 'Unknown',
-                        tags: listing.is_cleared ? ['Cleared'] : ['Active'],
+                        tags: listing.dietary_restrictions,
                         image: listing.image_url,
                       }}
                       onClick={() => {}}

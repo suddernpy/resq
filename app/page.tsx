@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { Search, Bell, ArrowRight } from "lucide-react"
+import { Search, Bell, ArrowRight } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 
 export default function Home() {
@@ -33,28 +33,45 @@ export default function Home() {
       </header>
 
       <main className="pt-16">
-        <section className="max-w-[720px] mx-auto px-6 py-24 text-center">
-          <div className="inline-block bg-[#DBEAFE] text-[#1751d6] px-4 py-1.5 rounded-full text-sm font-medium mb-8 shadow-sm hover:shadow transition-shadow">
-            Welcome to ResQ+
-          </div>
-          <h1 className="text-[#111827] text-5xl font-bold mb-6 tracking-tight">
-            Save Food, Share Joy
-          </h1>
-          <p className="text-gray-600 text-xl mb-8">
-            Join our community in reducing food waste across NUS. Find and share buffet 
-            leftovers to ensure no good food goes to waste.
-          </p>
-          <div className="flex items-center justify-center gap-4">
-            <Link href="/create-rescue">
-              <button className="bg-[#1751d6] text-white px-6 py-2.5 rounded-lg font-medium shadow-sm hover:shadow-md hover:bg-blue-700 transition-all">
-                Get Started
-              </button>
-            </Link>
-            <Link href="/map">
-              <button className="border border-[#1751d6] text-[#1751d6] px-6 py-2.5 rounded-lg font-medium hover:bg-blue-50 transition-colors">
-                Learn More
-              </button>
-            </Link>
+        <section className="max-w-[1200px] mx-auto px-6 py-24">
+          <div className="flex flex-col md:flex-row items-center md:items-start gap-12">
+            <div className="md:w-1/3 flex flex-col items-center md:items-start">
+              <div className="relative w-64 h-64">
+                <Image
+                  src="/logo.png"
+                  alt="ResQ+ Logo"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
+            </div>
+            <div className="md:w-2/3 text-left md:text-justify">
+              <div className="inline-block bg-[#DBEAFE] text-[#1751d6] px-4 py-1.5 rounded-full text-sm font-medium mb-8 shadow-sm hover:shadow transition-shadow">
+                Welcome to ResQ+
+              </div>
+              <h1 className="text-[#111827] text-4xl md:text-5xl font-bold mb-6 tracking-tight">
+                Save Food, Share Joy
+              </h1>
+              <p className="text-gray-600 text-lg mb-8">
+                Join our community in reducing food waste across NUS. Find and share buffet 
+                leftovers to ensure no good food goes to waste. Together, we can make a 
+                significant impact on sustainability and foster a culture of sharing within 
+                our campus community.
+              </p>
+              <div className="flex items-center gap-4">
+                <Link href="/create-rescue">
+                  <button className="bg-[#1751d6] text-white px-6 py-2.5 rounded-lg font-medium shadow-sm hover:shadow-md hover:bg-blue-700 transition-all">
+                    Get Started
+                  </button>
+                </Link>
+                <Link href="/map">
+                  <button className="border border-[#1751d6] text-[#1751d6] px-6 py-2.5 rounded-lg font-medium hover:bg-blue-50 transition-colors">
+                    Learn More
+                  </button>
+                </Link>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -119,28 +136,28 @@ export default function Home() {
           </div>
         </section>
 
-          <div className="mx-auto max-w-[1100px] rounded-3xl bg-gradient-to-r from-blue-600 to-blue-400 p-8 md:p-12 shadow-xl">
-            <div className="grid gap-8 md:grid-cols-2 md:gap-12 items-center">
-              <div className="space-y-4">
-                <h2 className="text-3xl font-bold text-white md:text-4xl">Ready to reduce food waste?</h2>
-                <p className="text-blue-50 text-lg">
-                  Join our mission to create a more sustainable campus community. Every meal shared is a step towards a greener future.
-                </p>
-              </div>
-              <div className="flex flex-col gap-4 sm:flex-row items-center justify-start md:justify-end">
-                <Button 
-                  size="lg" 
-                  variant="secondary"
-                  className="w-full sm:w-auto group relative overflow-hidden bg-white text-blue-600 hover:text-blue-700 shadow-md hover:shadow-lg transition-all duration-300"
-                >
-                  Learn More
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Button>
-                
-              </div>
+        <div className="mx-auto max-w-[1100px] rounded-3xl bg-gradient-to-r from-blue-600 to-blue-400 p-8 md:p-12 shadow-xl mb-24">
+          <div className="grid gap-8 md:grid-cols-2 md:gap-12 items-center">
+            <div className="space-y-4">
+              <h2 className="text-3xl font-bold text-white md:text-4xl">Ready to reduce food waste?</h2>
+              <p className="text-blue-50 text-lg">
+                Join our mission to create a more sustainable campus community. Every meal shared is a step towards a greener future.
+              </p>
+            </div>
+            <div className="flex flex-col gap-4 sm:flex-row items-center justify-start md:justify-end">
+              <Button 
+                size="lg" 
+                variant="secondary"
+                className="w-full sm:w-auto group relative overflow-hidden bg-white text-blue-600 hover:text-blue-700 shadow-md hover:shadow-lg transition-all duration-300"
+              >
+                Learn More
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Button>
             </div>
           </div>
+        </div>
       </main>
     </div>
   )
 }
+

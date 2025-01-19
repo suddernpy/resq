@@ -946,12 +946,5 @@
             "longitude": 103.775369,
             "latitude": 1.295111
         }
-    },
-    {
-        "roomCode": "YSTCM",
-        "coordinate": {
-            "longitude": 103.772923,
-            "latitude": 1.302256
-        }
     }
 ]
