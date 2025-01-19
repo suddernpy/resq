@@ -125,7 +125,7 @@ export default function Home() {
               Get real-time updates on Telegram
             </p>
             <Link 
-              href="https://t.me/resqf" 
+              href="https://t.me/+QI6ZJ4IRqyCBvzjQ" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-[#1751d6] font-medium inline-flex items-center group-hover:gap-1.5 gap-1 transition-all"
