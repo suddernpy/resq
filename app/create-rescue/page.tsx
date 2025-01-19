@@ -8,12 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent } from '@/components/ui/card';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
+
 import { ArrowLeft, Upload, Info } from 'lucide-react';
 import venuesData from '../../venues.json'; // Adjust the relative path based on your file location
 import { supabase } from '@/lib/supabaseClient';
