@@ -84,7 +84,8 @@ export function ListingCard({ listing, onClick }: ListingCardProps) {
         </div>
 
         {/* Tags */}
-        {listing.tags && listing.tags.length > 0 && (
+        {/* Tags */}
+{Array.isArray(listing.tags) && listing.tags.length > 0 && (
   <div className="flex gap-2 mt-2">
     {listing.tags.map((tag) => (
       <Badge
